@@ -9,11 +9,16 @@ document.getElementById("msg").innerText="Preencha tudo";
 return;
 }
 
-let usuario = {nome,email,senha};
+let usuario = {
+nome: nome,
+email: email,
+senha: senha,
+pagamento: "nao"
+};
 
 localStorage.setItem("usuario", JSON.stringify(usuario));
 
-document.getElementById("msg").innerText="Conta criada! Agora faça login.";
+document.getElementById("msg").innerText="Conta criada! Faça login.";
 
 }
 
