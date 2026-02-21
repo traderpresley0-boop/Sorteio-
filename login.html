@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Entrar</title>
+</head>
+
+<body>
+
+<h2>Entrar na conta</h2>
+
+<input type="email" id="email" placeholder="Email"><br><br>
+<input type="password" id="senha" placeholder="Senha"><br><br>
+
+<button onclick="entrar()">Entrar</button>
+
+<script>
+function entrar(){
+  const email = document.getElementById("email").value
+  const senha = document.getElementById("senha").value
+
+  const usuario = JSON.parse(localStorage.getItem("usuario"))
+
+  if(!usuario){
+    alert("Nenhuma conta criada")
+    return
+  }
+
+  if(email === usuario.email && senha === usuario.senha){
+    alert("Login feito!")
+    window.location.href = "conta.html"
+  }else{
+    alert("Dados errados")
+  }
+}
+</script>
+
+</body>
+</html>
