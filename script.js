@@ -1,21 +1,40 @@
-// criar conta
-function criarConta() {
-  const nome = document.querySelector("input[placeholder='Nome']")?.value || document.querySelector("input[type='text']").value
-  const email = document.querySelector("input[type='email']").value
-  const telefone = document.querySelector("input[placeholder='Telefone']").value
-  const senha = document.querySelector("input[type='password']").value
+// CADASTRO
+const formCadastro = document.getElementById("cadastro");
 
-  if (!nome || !email || !telefone || !senha) {
-    alert("Preencha todos os campos")
-    return
-  }
+if (formCadastro) {
+formCadastro.addEventListener("submit", function(e) {
+e.preventDefault();
 
-  const usuario = { nome, email, telefone, senha }
+const user = {
+nome: document.getElementById("nome").value,
+email: document.getElementById("email").value,
+telefone: document.getElementById("telefone").value,
+senha: document.getElementById("senha").value
+};
 
-  localStorage.setItem("usuario", JSON.stringify(usuario))
+localStorage.setItem("usuario", JSON.stringify(user));
 
-  alert("Conta criada com sucesso! Agora faça login.")
-
-  // vai para página de login
-  window.location.href = "login.html"
+alert("Conta criada com sucesso!");
+window.location.href = "login.html";
+});
 }
+
+// LOGIN
+const formLogin = document.getElementById("login");
+
+if (formLogin) {
+formLogin.addEventListener("submit", function(e) {
+e.preventDefault();
+
+const email = document.getElementById("loginEmail").value;
+const senha = document.getElementById("loginSenha").value;
+
+const usuario = JSON.parse(localStorage.getItem("usuario"));
+
+if (!usuario) {
+alert("Nenhuma conta encontrada!");
+return;
+}
+
+// ADMIN (teu acesso especial)
+if (email === "
