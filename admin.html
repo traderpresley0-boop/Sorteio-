@@ -1,33 +1,90 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt">
 <head>
 <meta charset="UTF-8">
 <title>Painel Admin</title>
-<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="container">
+<h1>🔐 Painel do Administrador</h1>
 
 <div id="login">
-<h2>Login do Administrador</h2>
-<input type="password" id="senhaAdmin" placeholder="Senha">
-<button onclick="entrar()">Entrar</button>
+
+<input type="password" id="senhaAdmin" placeholder="Senha admin">
+<br><br>
+<button onclick="loginAdmin()">Entrar</button>
+
 <p id="erro"></p>
+
 </div>
 
-<div id="painel" style="display:none;">
-<h2>Painel do Site</h2>
+<div id="painel" style="display:none">
 
-<p>Usuários cadastrados:</p>
-<ul id="lista"></ul>
+<h2>Dados do Usuário</h2>
 
+<p id="dados"></p>
+
+<button onclick="aprovar()">Aprovar Pagamento</button>
 <button onclick="logout()">Sair</button>
-</div>
 
 </div>
 
-<script src="admin.js"></script>
+<script>
+
+const senhaCorreta = "Admin@2026"; // MUDE depois
+
+function loginAdmin(){
+
+let senha = document.getElementById("senhaAdmin").value;
+
+if(senha === senhaCorreta){
+
+document.getElementById("login").style.display="none";
+document.getElementById("painel").style.display="block";
+
+mostrarDados();
+
+}else{
+document.getElementById("erro").innerText="Senha errada";
+}
+
+}
+
+function mostrarDados(){
+
+let usuario = JSON.parse(localStorage.getItem("usuario"));
+
+if(!usuario){
+document.getElementById("dados").innerText="Nenhum usuário cadastrado";
+return;
+}
+
+document.getElementById("dados").innerHTML =
+"Nome: " + usuario.nome + "<br>" +
+"Email: " + usuario.email + "<br>" +
+"Status pagamento: " + usuario.pagamento;
+
+}
+
+function aprovar(){
+
+let usuario = JSON.parse(localStorage.getItem("usuario"));
+
+usuario.pagamento = "aprovado";
+
+localStorage.setItem("usuario", JSON.stringify(usuario));
+
+alert("Pagamento aprovado!");
+mostrarDados();
+
+}
+
+function logout(){
+location.reload();
+}
+
+</script>
+
 </body>
 </html>
