@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Painel Admin</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<div id="login">
+<h2>Login do Administrador</h2>
+<input type="password" id="senhaAdmin" placeholder="Senha">
+<button onclick="entrar()">Entrar</button>
+<p id="erro"></p>
+</div>
+
+<div id="painel" style="display:none;">
+<h2>Painel do Site</h2>
+
+<p>Usuários cadastrados:</p>
+<ul id="lista"></ul>
+
+<button onclick="logout()">Sair</button>
+</div>
+
+</div>
+
+<script src="admin.js"></script>
+</body>
+</html>
