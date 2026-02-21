@@ -9,14 +9,23 @@ document.getElementById("msg").innerText="Preencha tudo";
 return;
 }
 
-let usuario = {
-nome: nome,
-email: email,
-senha: senha,
-pagamento: "nao"
-};
+let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
 
-localStorage.setItem("usuario", JSON.stringify(usuario));
+let existe = usuarios.find(u => u.email === email);
+
+if(existe){
+document.getElementById("msg").innerText="Email já cadastrado";
+return;
+}
+
+usuarios.push({
+nome,
+email,
+senha,
+pagamento:"nao"
+});
+
+localStorage.setItem("usuarios", JSON.stringify(usuarios));
 
 document.getElementById("msg").innerText="Conta criada! Faça login.";
 
@@ -27,18 +36,14 @@ function entrar(){
 let email = document.getElementById("emailLogin").value;
 let senha = document.getElementById("senhaLogin").value;
 
-let usuario = JSON.parse(localStorage.getItem("usuario"));
+let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
 
-if(!usuario){
-document.getElementById("msg").innerText="Nenhuma conta criada";
-return;
-}
+let usuario = usuarios.find(u => u.email === email && u.senha === senha);
 
-if(email === usuario.email && senha === usuario.senha){
-
+if(usuario){
 localStorage.setItem("logado","true");
+localStorage.setItem("usuarioAtual", email);
 window.location.href="conta.html";
-
 }else{
 document.getElementById("msg").innerText="Email ou senha errados";
 }
