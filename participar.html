@@ -1,40 +1,3 @@
-<!DOCTYPE html>
-<html lang="pt">
-<head>
-<meta charset="UTF-8">
-<title>Pagamento do Sorteio</title>
-<link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-<div class="container">
-
-<h1>🎉 Participar do Sorteio</h1>
-
-<p>Para participar faça um depósito mínimo de:</p>
-
-<h2>500 Kz</h2>
-
-<hr>
-
-<h3>💳 Dados para Depósito</h3>
-
-<p><b>Banco:</b> Kwik</p>
-<p><b>Nome:</b> Zeferino Estevão Borges</p>
-<p><b>IBAN:</b> AO06042000000000027091758</p>
-
-<p>Após o pagamento envie o comprovante:</p>
-
-<input type="file" id="comprovante">
-<br><br>
-
-<button onclick="enviarComprovante()">Enviar Comprovante</button>
-
-<p id="status"></p>
-
-</div>
-
 <script>
 
 function enviarComprovante(){
@@ -47,13 +10,14 @@ document.getElementById("status").innerHTML =
 return;
 }
 
-document.getElementById("status").innerHTML =
-"✅ Comprovante enviado! Aguarde confirmação do administrador.";
+let usuario = JSON.parse(localStorage.getItem("usuario"));
+usuario.pagamento = "pendente";
 
-localStorage.setItem("pagamento","pendente");
+localStorage.setItem("usuario", JSON.stringify(usuario));
+
+document.getElementById("status").innerHTML =
+"✅ Comprovante enviado! Aguarde confirmação.";
+
 }
 
 </script>
-
-</body>
-</html>
