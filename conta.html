@@ -7,9 +7,9 @@
 
 <body>
 
-<h1>✅ Conta do Usuário</h1>
+<h1>Minha Conta</h1>
 
-<p>Você está logado.</p>
+<p id="statusPagamento"></p>
 
 <button onclick="irSorteio()">Participar do Sorteio</button>
 <br><br>
@@ -20,6 +20,11 @@
 if(localStorage.getItem("logado") !== "true"){
 window.location.href="index.html";
 }
+
+let usuario = JSON.parse(localStorage.getItem("usuario"));
+
+document.getElementById("statusPagamento").innerText =
+"Status do pagamento: " + usuario.pagamento;
 
 function irSorteio(){
 window.location.href="participar.html";
